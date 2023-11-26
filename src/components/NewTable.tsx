@@ -75,7 +75,7 @@ const NewTable = ({ open, setOpen }: Props) => {
           </Button>
           <Button
             variant="contained"
-            disabled={!newTable.name || !newTable.locationId}
+            disabled={!newTable.name}
             onClick={handleCreateNewMenu}
           >
             Confirm

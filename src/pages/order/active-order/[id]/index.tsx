@@ -1,8 +1,10 @@
 import OrderCard from "@/components/OrderCard";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { refreshOrder } from "@/store/slices/orderSlice";
 import { formatOrders } from "@/utils/generals";
 import { Box } from "@mui/material";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const ActiveOrder = () => {
   const router = useRouter();
@@ -12,8 +14,20 @@ const ActiveOrder = () => {
   const orders = allOrders.filter((order) => order.orderSeq === orderSeq);
   const menus = useAppSelector((state) => state.menu.items);
   const tables = useAppSelector((state) => state.table.items);
+  const dispatch = useAppDispatch();
 
   const formattedOrders = formatOrders(orders, addons, menus, tables);
+
+  useEffect(() => {
+    if (orderSeq) {
+      setInterval(handleRefreshOrders, 10000);
+    }
+  }, [orderSeq]);
+
+  const handleRefreshOrders = () => {
+    dispatch(refreshOrder({ orderSeq: String(orderSeq) }));
+  };
+
   return (
     <Box sx={{ mx: 3 }}>
       <Box

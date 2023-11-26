@@ -100,7 +100,7 @@ export default async function handler(
         addonCategory,
         menuAddonCategory,
         addons,
-        location: [],
+        location: [location],
         table: [table],
         disabledLocationMenuCategory: [],
         disabledLocationMenu: [],

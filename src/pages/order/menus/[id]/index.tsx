@@ -49,7 +49,7 @@ const MenuDetail = () => {
       (item) => item.isRequired
     );
 
-    const selectedRequiredAddonCategories = selectedAddons.filter((item) => {
+    const selectedRequiredAddons = selectedAddons.filter((item) => {
       const addonCategory = addonCategories.find(
         (addonCategory) => addonCategory.id === item.addonCategoryId
       );
@@ -57,9 +57,9 @@ const MenuDetail = () => {
     });
 
     const isDisabled =
-      requiredAddonCategories.length !== selectedRequiredAddonCategories.length;
+      requiredAddonCategories.length !== selectedRequiredAddons.length;
     setIsDisabled(isDisabled);
-  }, [selectedAddons, addonCategories]);
+  }, [selectedAddons]);
 
   const cartItems = useAppSelector((state) => state.cart.items);
   const cartItemId = query.cartItemId;

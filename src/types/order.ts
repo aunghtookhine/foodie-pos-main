@@ -22,6 +22,10 @@ export interface UpdateOrderOptions extends BaseOptions {
   status: ORDERSTATUS;
 }
 
+export interface RefreshOrderOptions extends BaseOptions {
+  orderSeq: string;
+}
+
 export interface OrderAddon {
   addonCategoryId: number;
   addons: Addon[];
