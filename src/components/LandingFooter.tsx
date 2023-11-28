@@ -9,13 +9,14 @@ const LandingFooter = () => {
       sx={{
         bgcolor: "primary.main",
         display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
         justifyContent: "space-around",
         alignItems: "center",
         p: 3,
         color: "#ffffff",
       }}
     >
-      <Box>
+      <Box sx={{ mb: 2, textAlign: { xs: "center", lg: "start" } }}>
         <Typography>© foodiePOS</Typography>
         <Typography>Privacy Policy | Terms of service</Typography>
       </Box>

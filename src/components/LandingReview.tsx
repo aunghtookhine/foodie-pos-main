@@ -3,6 +3,26 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 const LandingReview = () => {
+  const data = [
+    {
+      id: 1,
+      name: "John Doe",
+      href: "/pic1.jpeg",
+      position: "CEO of Kyate Htar",
+    },
+    {
+      id: 2,
+      name: "Amelia Aniston",
+      href: "/pic2.jpeg",
+      position: "CEO of Bike Sar",
+    },
+    {
+      id: 3,
+      name: "Mac Arthur",
+      href: "/pic3.jpeg",
+      position: "CEO of Ah Myan Sarr",
+    },
+  ];
   return (
     <Box
       sx={{
@@ -20,99 +40,71 @@ const LandingReview = () => {
       >
         Our customers love foodiePOS!
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "space-evenly", mb: 5 }}>
-        <Box sx={{ bgcolor: "#ffffff", width: 300, p: 5, borderRadius: 10 }}>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <FormatQuoteRoundedIcon
-              sx={{ fontSize: 50, color: "primary.main" }}
-            />
-          </Box>
-          <Typography sx={{ fontStyle: "italic" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quidem
-            eaque numquam provident minus veniam!
-          </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: { xs: "column", sm: "row" },
+          justifyContent: "space-evenly",
+          alignItems: "center",
+          mb: 5,
+          width: "100%",
+        }}
+      >
+        {data.map((item) => (
           <Box
+            key={item.id}
             sx={{
-              display: "flex",
-              alignItems: "center",
-              mt: 2,
+              bgcolor: "#ffffff",
+              width: { xs: "80%", sm: "40%", lg: "20%" },
+              p: { xs: 3, lg: 5 },
+              borderRadius: 10,
+              mb: 3,
             }}
           >
-            <Image
-              src={"/pic1.jpeg"}
-              alt={"profile-1"}
-              width={100}
-              height={100}
-              style={{ borderRadius: 50 }}
-            />
-            <Box sx={{ ml: 3 }}>
-              <Typography sx={{ fontWeight: "bold" }}>John Doe</Typography>
-              <Typography>CEO of Kyate Htar</Typography>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <FormatQuoteRoundedIcon
+                sx={{ fontSize: 50, color: "primary.main" }}
+              />
+            </Box>
+            <Typography sx={{ fontStyle: "italic" }}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
+              quidem eaque numquam provident minus veniam!
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", lg: "row" },
+                alignItems: "center",
+                mt: 2,
+              }}
+            >
+              <Image
+                src={item.href}
+                alt={"profile"}
+                width={100}
+                height={100}
+                style={{ borderRadius: 50 }}
+              />
+              <Box
+                sx={{
+                  ml: { lg: 3 },
+                  mt: { xs: 3, lg: 0 },
+                  textAlign: { xs: "center", lg: "start" },
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  {item.name}
+                </Typography>
+                <Typography sx={{}}>{item.position}</Typography>
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <Box sx={{ bgcolor: "#ffffff", width: 300, p: 5, borderRadius: 10 }}>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <FormatQuoteRoundedIcon
-              sx={{ fontSize: 50, color: "primary.main" }}
-            />
-          </Box>
-          <Typography sx={{ fontStyle: "italic" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quidem
-            eaque numquam provident minus veniam!
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              mt: 2,
-            }}
-          >
-            <Image
-              src={"/pic2.jpeg"}
-              alt={"profile-2"}
-              width={100}
-              height={100}
-              style={{ borderRadius: 50 }}
-            />
-            <Box sx={{ ml: 3 }}>
-              <Typography sx={{ fontWeight: "bold" }}>
-                Amelia Aniston
-              </Typography>
-              <Typography>CEO of Bike Sar</Typography>
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ bgcolor: "#ffffff", width: 300, p: 5, borderRadius: 10 }}>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <FormatQuoteRoundedIcon
-              sx={{ fontSize: 50, color: "primary.main" }}
-            />
-          </Box>
-          <Typography sx={{ fontStyle: "italic" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quidem
-            eaque numquam provident minus veniam!
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              mt: 2,
-            }}
-          >
-            <Image
-              src={"/pic3.jpeg"}
-              alt={"profile-3"}
-              width={100}
-              height={100}
-              style={{ borderRadius: 50 }}
-            />
-            <Box sx={{ ml: 3 }}>
-              <Typography sx={{ fontWeight: "bold" }}>Mac Authur</Typography>
-              <Typography>CEO of Ah Myan Sarr</Typography>
-            </Box>
-          </Box>
-        </Box>
+        ))}
       </Box>
     </Box>
   );

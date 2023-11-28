@@ -25,6 +25,7 @@ const LandingTopBar = () => {
         variant="contained"
         color="success"
         onClick={() => router.push("/backoffice")}
+        sx={{ display: { xs: "none", sm: "block" } }}
       >
         Start free trial
       </Button>

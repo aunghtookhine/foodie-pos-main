@@ -7,44 +7,52 @@ const LandingContent = () => {
   return (
     <Box
       sx={{
-        display: "flex",
+        display: { xs: "block", lg: "flex" },
         justifyContent: "space-evenly",
         alignItems: "center",
-        p: 5,
+        p: { xs: 4, lg: 5 },
       }}
     >
       <Box
         sx={{
-          display: "flex",
+          display: { xs: "block", lg: "flex" },
           flexDirection: "column",
           justifyContent: "center",
-          width: "30%",
+          width: { xs: "100%", lg: "30%" },
         }}
       >
-        <Typography variant="h3" color={"primary"}>
+        <Typography
+          variant="h3"
+          color={"primary"}
+          sx={{ textAlign: { xs: "center", lg: "start" } }}
+        >
           Food ordering system for restaurants
         </Typography>
-        <Typography sx={{ fontSize: 20, mt: 2 }}>
+        <Typography
+          sx={{ fontSize: 20, mt: 2, textAlign: { xs: "center", lg: "start" } }}
+        >
           foodiePOS is everything your restaurant needs for you to take orders
           of your customers directly from your website or app while protecting
           your bottom line from third-party aggregators and enabling you to grow
           your revenue.
         </Typography>
-        <Button
-          variant="contained"
-          color="success"
-          sx={{ width: "fit-content", p: 1, mt: 2 }}
-          onClick={() => router.push("/backoffice")}
-        >
-          Start free trial
-        </Button>
+        <Box sx={{ textAlign: { xs: "center", lg: "start" }, my: 2 }}>
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ width: "fit-content", p: 1 }}
+            onClick={() => router.push("/backoffice")}
+          >
+            Start free trial
+          </Button>
+        </Box>
       </Box>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          width: "40%",
+          width: { xs: "100%", lg: "40%" },
         }}
       >
         <Image
