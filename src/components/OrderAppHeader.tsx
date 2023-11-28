@@ -14,12 +14,12 @@ const OrderAppHeader = ({ cartItemCount }: Props) => {
   const tableId = router.query.tableId;
   const isHome = router.pathname === "/order";
   const isCart = router.pathname === "/order/cart";
-  const isActiveOrder = router.pathname.includes("/order/activeOrder");
+  const isActiveOrder = router.pathname.includes("/order/active-order");
   const isCartOrActiveOrderPage = isCart || isActiveOrder;
 
-  const location = useAppSelector((state) => state.location.items);
+  const locations = useAppSelector((state) => state.location.items);
 
-  if (!location) return null;
+  if (!locations.length) return null;
 
   return (
     <Box
@@ -101,14 +101,14 @@ const OrderAppHeader = ({ cartItemCount }: Props) => {
                 mt: 15,
               }}
             >
-              {location[0].name}
+              {locations[0].name}
             </Typography>
             <Typography
               variant="body1"
               sx={{ fontStyle: "italic", lineHeight: 1.2 }}
             >
-              {location[0].street}
-              <br /> {location[0].township}, {location[0].city}
+              {locations[0].street}
+              <br /> {locations[0].township}, {locations[0].city}
             </Typography>
           </Box>
         </Box>

@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchAppData } from "@/store/slices/appSlice";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 import OrderAppHeader from "../OrderAppHeader";
@@ -12,10 +13,12 @@ interface Props {
 const OrderAppLayout = ({ children }: Props) => {
   const router = useRouter();
   const isHome = router.pathname === "/order";
+  const isActiveOrder = router.pathname.includes("/active-order");
   const { tableId } = router.query;
   const dispatch = useAppDispatch();
   const [cartItemCount, setCartItemCount] = useState<number>(0);
   const cartItems = useAppSelector((state) => state.cart.items);
+  const orders = useAppSelector((state) => state.order.items);
 
   useEffect(() => {
     if (tableId) {
@@ -26,6 +29,7 @@ const OrderAppLayout = ({ children }: Props) => {
   useEffect(() => {
     setCartItemCount(cartItems.length);
   }, [cartItems]);
+
   return (
     <Box>
       <OrderAppHeader cartItemCount={cartItemCount} />
@@ -39,6 +43,36 @@ const OrderAppLayout = ({ children }: Props) => {
           {children}
         </Box>
       </Box>
+      {orders.length && !isActiveOrder && (
+        <Box
+          sx={{
+            width: "100vw",
+            height: 30,
+            bgcolor: "primary.main",
+            position: "fixed",
+            bottom: 0,
+            zIndex: 10,
+            color: "#ffffff",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography sx={{ userSelect: "none" }}>
+            Click{" "}
+            <Link
+              href={{
+                pathname: `order/active-order/${orders[0].orderSeq}`,
+                query: router.query,
+              }}
+              style={{ color: "#ffffff" }}
+            >
+              here
+            </Link>{" "}
+            to see your orders.
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };

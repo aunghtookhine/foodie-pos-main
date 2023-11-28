@@ -2,7 +2,7 @@ import OrderCard from "@/components/OrderCard";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { refreshOrder } from "@/store/slices/orderSlice";
 import { formatOrders } from "@/utils/generals";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -17,29 +17,38 @@ const ActiveOrder = () => {
   const dispatch = useAppDispatch();
 
   const formattedOrders = formatOrders(orders, addons, menus, tables);
+  let intervalId: number;
 
   useEffect(() => {
     if (orderSeq) {
-      setInterval(handleRefreshOrders, 10000);
+      intervalId = window.setInterval(handleRefreshOrders, 3000);
     }
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
   }, [orderSeq]);
 
   const handleRefreshOrders = () => {
     dispatch(refreshOrder({ orderSeq: String(orderSeq) }));
   };
 
+  if (!orders.length) return null;
   return (
     <Box sx={{ mx: 3 }}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
           p: 3,
           bgcolor: "#E8F6EF",
           borderRadius: 15,
         }}
       >
-        OrderSeq: {orderSeq}
+        <Typography>OrderSeq: {orderSeq}</Typography>
+        <Typography>Total Price: {orders[0].totalPrice}</Typography>
       </Box>
       <Box
         sx={{

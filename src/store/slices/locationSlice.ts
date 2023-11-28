@@ -76,7 +76,6 @@ const locationSlice = createSlice({
   reducers: {
     setLocations: (state, action: PayloadAction<Location[]>) => {
       state.items = action.payload;
-      console.log(state.items);
       const selectedLocationId = localStorage.getItem("selectedLocationId");
       if (!selectedLocationId) {
         localStorage.setItem(
