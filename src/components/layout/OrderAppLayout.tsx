@@ -1,10 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchAppData } from "@/store/slices/appSlice";
-import { Box, Typography } from "@mui/material";
-import { ORDERSTATUS } from "@prisma/client";
-import Link from "next/link";
+import { Box } from "@mui/material";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
+import OrderAppFooter from "../OrderAppFooter";
 import OrderAppHeader from "../OrderAppHeader";
 
 interface Props {
@@ -14,20 +13,11 @@ interface Props {
 const OrderAppLayout = ({ children }: Props) => {
   const { isReady, ...router } = useRouter();
   const isHome = router.pathname === "/order";
-  const isActiveOrder = router.pathname.includes("/active-order");
+
   const { tableId } = router.query;
   const dispatch = useAppDispatch();
   const [cartItemCount, setCartItemCount] = useState<number>(0);
   const cartItems = useAppSelector((state) => state.cart.items);
-  const orders = useAppSelector((state) => state.order.items);
-  const showActiveOrdersFooter =
-    orders.length &&
-    !isActiveOrder &&
-    orders
-      .map((order) => order.status)
-      .some(
-        (item) => item === ORDERSTATUS.PENDING || item === ORDERSTATUS.COOKING
-      );
 
   useEffect(() => {
     if (tableId) {
@@ -61,36 +51,7 @@ const OrderAppLayout = ({ children }: Props) => {
           {children}
         </Box>
       </Box>
-      {showActiveOrdersFooter && (
-        <Box
-          sx={{
-            width: "100vw",
-            height: 30,
-            bgcolor: "primary.main",
-            position: "fixed",
-            bottom: 0,
-            zIndex: 10,
-            color: "#ffffff",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography sx={{ userSelect: "none" }}>
-            Click{" "}
-            <Link
-              href={{
-                pathname: `order/active-order/${orders[0].orderSeq}`,
-                query: router.query,
-              }}
-              style={{ color: "#ffffff" }}
-            >
-              here
-            </Link>{" "}
-            to see your orders.
-          </Typography>
-        </Box>
-      )}
+      <OrderAppFooter />
     </Box>
   );
 };

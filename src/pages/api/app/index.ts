@@ -18,6 +18,8 @@ export default async function handler(
         where: { id: Number(tableId) },
       });
 
+      if (!table) return res.status(400).send("Bad Request.");
+
       const locationId = table?.locationId;
 
       const location = await prisma.location.findFirst({
