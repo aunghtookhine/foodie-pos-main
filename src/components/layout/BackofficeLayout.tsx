@@ -14,7 +14,6 @@ const BackofficeLayout = ({ children }: Props) => {
   const { data: session } = useSession();
   const dispatch = useAppDispatch();
   const { init } = useAppSelector((state) => state.app);
-
   // const locations = useAppSelector((state) => state.location.items);
 
   useEffect(() => {
@@ -28,7 +27,7 @@ const BackofficeLayout = ({ children }: Props) => {
       <TopBar />
       <Box sx={{ display: "flex" }}>
         {session && (
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box sx={{ display: { xs: "none", sm: "flex" } }}>
             <SideBar />
           </Box>
         )}

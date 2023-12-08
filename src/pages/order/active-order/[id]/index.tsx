@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { refreshOrder } from "@/store/slices/orderSlice";
 import { formatOrders } from "@/utils/generals";
 import { Box, Typography } from "@mui/material";
+import { Order } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -33,7 +34,19 @@ const ActiveOrder = () => {
     dispatch(refreshOrder({ orderSeq: String(orderSeq) }));
   };
 
-  if (!orders.length) return null;
+  const getTotalAmountForActiveOrders = (orders: Order[]) => {
+    let itemIds: string[] = [];
+    return orders.reduce((prev, curr) => {
+      const isExist = itemIds.find((itemId) => itemId === curr.itemId);
+      if (!isExist) {
+        itemIds = [...itemIds, curr.itemId];
+        prev += curr.totalPrice;
+      }
+      return prev;
+    }, 0);
+  };
+
+  if (!orders.length || !formattedOrders.length) return null;
   return (
     <Box sx={{ mx: 3 }}>
       <Box
@@ -48,12 +61,15 @@ const ActiveOrder = () => {
         }}
       >
         <Typography>OrderSeq: {orderSeq}</Typography>
-        <Typography>Total Price: {orders[0].totalPrice}</Typography>
+        <Typography>
+          Total Price: {getTotalAmountForActiveOrders(orders)}
+        </Typography>
       </Box>
       <Box
         sx={{
           display: "flex",
           flexWrap: "wrap",
+          justifyContent: "center",
           mt: 2,
         }}
       >

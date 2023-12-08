@@ -15,7 +15,7 @@ const OrderApp = () => {
   );
   const menus = useAppSelector((state) => state.menu.items);
 
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number>(0);
   const [selectedMenuCategory, setSelectedMenuCategory] =
     useState<MenuCategory>();
 
@@ -51,7 +51,7 @@ const OrderApp = () => {
   }, [isReady]);
 
   return (
-    <Box>
+    <Box sx={{ px: { xs: 0, sm: 3 } }}>
       <Box>
         <Tabs
           value={value}
@@ -75,7 +75,14 @@ const OrderApp = () => {
           ))}
         </Tabs>
       </Box>
-      <Box sx={{ display: "flex", mt: 2, flexWrap: "wrap" }}>
+      <Box
+        sx={{
+          display: "flex",
+          mt: 2,
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "flex-start" },
+        }}
+      >
         {renderMenus()}
       </Box>
     </Box>

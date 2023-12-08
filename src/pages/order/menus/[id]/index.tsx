@@ -107,7 +107,7 @@ const MenuDetail = () => {
           zIndex: 3,
         }}
       />
-      <Box sx={{ zIndex: 3 }}>
+      <Box sx={{ zIndex: 3, width: { xs: "80%", lg: "50%" } }}>
         <AddonCategories
           addonCategories={addonCategories}
           selectedAddons={selectedAddons}

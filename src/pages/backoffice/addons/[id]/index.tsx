@@ -77,19 +77,9 @@ const UpdateAddonPage = () => {
       <Box
         sx={{
           mb: 2,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
         }}
       >
         <Typography variant="h4">Update Addon</Typography>
-        <Button
-          variant="outlined"
-          color={"error"}
-          onClick={() => setOpen(true)}
-        >
-          Delete
-        </Button>
       </Box>
       <TextField
         sx={{ mb: 2 }}
@@ -142,6 +132,14 @@ const UpdateAddonPage = () => {
       <Box sx={{ mt: 2 }}>
         <Button variant="contained" onClick={handleUpdateAddon}>
           Update
+        </Button>
+        <Button
+          sx={{ ml: 2 }}
+          variant="outlined"
+          color={"error"}
+          onClick={() => setOpen(true)}
+        >
+          Delete
         </Button>
         <Dialog open={open} onClose={() => setOpen(false)}>
           <DialogTitle>Confirm delete addon</DialogTitle>

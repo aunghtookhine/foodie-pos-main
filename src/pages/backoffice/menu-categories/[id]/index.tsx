@@ -87,19 +87,9 @@ const UpdateMenuCategoryPage = () => {
       <Box
         sx={{
           mb: 2,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
         }}
       >
         <Typography variant="h4">Update Menu Category</Typography>
-        <Button
-          variant="outlined"
-          color={"error"}
-          onClick={() => setOpen(true)}
-        >
-          Delete
-        </Button>
       </Box>
       <TextField
         defaultValue={menuCategory.name}
@@ -118,6 +108,14 @@ const UpdateMenuCategoryPage = () => {
       <Box sx={{ mt: 2 }}>
         <Button variant={"contained"} onClick={handleUpdateMenuCategory}>
           Update
+        </Button>
+        <Button
+          sx={{ ml: 2 }}
+          variant="outlined"
+          color={"error"}
+          onClick={() => setOpen(true)}
+        >
+          Delete
         </Button>
       </Box>
       <Dialog

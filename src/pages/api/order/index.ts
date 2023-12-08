@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { CartItem } from "@/types/cart";
 import { prisma } from "@/utils/db";
-import { getTotalAmount } from "@/utils/generals";
 import { ORDERSTATUS } from "@prisma/client";
 import { nanoid } from "nanoid";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -32,8 +31,15 @@ export default async function handler(
     const orderSeq = order ? order.orderSeq : nanoid();
     for (const item of cartItems) {
       const cartItem = item as CartItem;
+      let totalPrice = cartItem.menu.price;
       const hasAddons = cartItem.addons.length > 0;
       if (hasAddons) {
+        const totalAddonPrices = cartItem.addons.reduce(
+          (prev, curr) => (prev += curr.price),
+          0
+        );
+        totalPrice += totalAddonPrices;
+
         for (const addon of cartItem.addons) {
           await prisma.order.create({
             data: {
@@ -43,7 +49,7 @@ export default async function handler(
               orderSeq,
               itemId: cartItem.id,
               status: ORDERSTATUS.PENDING,
-              totalPrice: getTotalAmount(cartItems),
+              totalPrice: totalPrice * cartItem.quantity,
               tableId,
             },
           });
@@ -56,7 +62,7 @@ export default async function handler(
             orderSeq,
             itemId: cartItem.id,
             status: ORDERSTATUS.PENDING,
-            totalPrice: getTotalAmount(cartItems),
+            totalPrice: totalPrice * cartItem.quantity,
             tableId,
           },
         });

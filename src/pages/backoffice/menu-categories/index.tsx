@@ -18,7 +18,14 @@ const MenuCategoriesPage = () => {
           Create New Menu Category
         </Button>
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "flex-start" },
+          mt: 2,
+        }}
+      >
         {menuCategories.map((menuCategory) => {
           const exist = disabledLocationMenuCategories.find(
             (disabledLocationMenuCategory) =>

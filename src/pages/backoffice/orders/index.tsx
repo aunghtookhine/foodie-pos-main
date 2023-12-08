@@ -3,6 +3,9 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { updateOrder } from "@/store/slices/orderSlice";
 import { OrderItem } from "@/types/order";
 import { formatOrders } from "@/utils/generals";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import MicrowaveIcon from "@mui/icons-material/Microwave";
+import TimerIcon from "@mui/icons-material/Timer";
 import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { ORDERSTATUS } from "@prisma/client";
 import { useEffect, useState } from "react";
@@ -44,17 +47,23 @@ const OrdersPage = () => {
           onChange={(evt, value) => setStatusValue(value)}
         >
           <ToggleButton value={ORDERSTATUS.PENDING}>
-            {ORDERSTATUS.PENDING}
+            <TimerIcon />
           </ToggleButton>
           <ToggleButton value={ORDERSTATUS.COOKING}>
-            {ORDERSTATUS.COOKING}
+            <MicrowaveIcon />
           </ToggleButton>
           <ToggleButton value={ORDERSTATUS.COMPLETE}>
-            {ORDERSTATUS.COMPLETE}
+            <CheckCircleIcon />
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "flex-start" },
+        }}
+      >
         {orderItems.map((orderItem) => {
           return (
             <OrderCard

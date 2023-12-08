@@ -74,7 +74,7 @@ const SideBar = () => {
       sx={{
         minWidth: "250px",
         bgcolor: "success.main",
-        borderTopRightRadius: "20px",
+        borderTopRightRadius: { xs: 0, sm: 20 },
         minHeight: "100vh",
       }}
     >

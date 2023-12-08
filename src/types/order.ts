@@ -34,6 +34,7 @@ export interface OrderAddon {
 export interface OrderItem {
   itemId: string;
   status: ORDERSTATUS;
+  quantity: number;
   orderAddons: OrderAddon[];
   menu: Menu;
   table: Table;

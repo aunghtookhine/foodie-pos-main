@@ -84,7 +84,7 @@ const Addons = ({
               />
             )}
             <Typography sx={{ fontStyle: "italic", userSelect: "none" }}>
-              {addon.price} Kyats
+              {addon.price}
             </Typography>
           </Box>
         );

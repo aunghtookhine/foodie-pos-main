@@ -11,19 +11,22 @@ interface Props {
 
 const OrderCard = ({ orderItem, handleStatusChange, isAdmin }: Props) => {
   const addonCategories = useAppSelector((state) => state.addonCategory.items);
+
   return (
     <Card sx={{ width: 280, height: 280, mr: 2, mb: 2 }}>
       <Box
         sx={{
-          hieght: 40,
           bgcolor: "primary.main",
           display: "flex",
           justifyContent: "space-between",
+          alignItems: "center",
           p: 1,
           color: "#ffffff",
         }}
       >
-        <Typography>{orderItem.menu.name}</Typography>
+        <Typography>
+          {orderItem.menu.name} X {orderItem.quantity}
+        </Typography>
         <Typography>{orderItem.table.name}</Typography>
       </Box>
       <Box sx={{ px: 2 }}>

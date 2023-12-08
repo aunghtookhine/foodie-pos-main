@@ -45,7 +45,6 @@ export const fetchAppData = createAsyncThunk(
         order,
       } = appData;
 
-      thunkApi.dispatch(setInit(true));
       thunkApi.dispatch(setMenuCategories(menuCategory));
       thunkApi.dispatch(setMenus(menu));
       thunkApi.dispatch(setMenuCategoryMenus(menuCategoryMenu));
@@ -60,6 +59,7 @@ export const fetchAppData = createAsyncThunk(
       thunkApi.dispatch(setDisabledLocationMenus(disabledLocationMenu));
       thunkApi.dispatch(setOrders(order));
       thunkApi.dispatch(setCompany(company));
+      thunkApi.dispatch(setInit(true));
       onSuccess && onSuccess();
     } catch (err) {
       onError && onError();

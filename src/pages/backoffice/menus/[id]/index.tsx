@@ -134,15 +134,9 @@ const UpdateMenuPage = () => {
       <Box
         sx={{
           mb: 2,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
         }}
       >
         <Typography variant="h4">Update Menu</Typography>
-        <Button variant="outlined" color={"error"} onClick={handleDeleteMenu}>
-          Delete
-        </Button>
       </Box>
       <Box
         sx={{
@@ -235,6 +229,14 @@ const UpdateMenuPage = () => {
       <Box sx={{ mt: 2 }}>
         <Button variant="contained" onClick={handleUpdateMenu}>
           Update
+        </Button>
+        <Button
+          sx={{ ml: 2 }}
+          variant="outlined"
+          color={"error"}
+          onClick={handleDeleteMenu}
+        >
+          Delete
         </Button>
       </Box>
     </Box>

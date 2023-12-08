@@ -1,24 +1,29 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Button, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Box, Button, Drawer, IconButton, Typography } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { useState } from "react";
+import SideBar from "./SideBar";
 
 const TopBar = () => {
   const { data: session } = useSession();
   const selectedLocation = useAppSelector(
     (state) => state.location.selectedLocation
   );
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        px: 2,
+        px: 3,
         bgcolor: "success.main",
       }}
     >
-      <Box sx={{ height: "70px" }}>
+      <Box sx={{ height: "70px", display: { xs: "none", sm: "block" } }}>
         <Image
           width={100}
           height={100}
@@ -42,9 +47,16 @@ const TopBar = () => {
       </Box>
       {session ? (
         <Box>
+          <IconButton sx={{ display: { xs: "block", sm: "none" } }}>
+            <MenuIcon
+              sx={{ color: "secondary.main", fontSize: 35 }}
+              onClick={() => setDrawerOpen(true)}
+            />
+          </IconButton>
           <Button
             variant="contained"
             onClick={() => signOut({ callbackUrl: "/" })}
+            sx={{ display: { xs: "none", sm: "block" } }}
           >
             Sign out
           </Button>
@@ -52,6 +64,14 @@ const TopBar = () => {
       ) : (
         <span />
       )}
+      <Drawer
+        anchor={"left"}
+        open={drawerOpen}
+        onClick={() => setDrawerOpen(false)}
+        onClose={() => setDrawerOpen(false)}
+      >
+        <SideBar />
+      </Drawer>
     </Box>
   );
 };

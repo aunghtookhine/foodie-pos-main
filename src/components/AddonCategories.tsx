@@ -15,7 +15,7 @@ const AddonCategories = ({
   setSelectedAddons,
 }: Props) => {
   return (
-    <Box sx={{ width: 500, mt: 2 }}>
+    <Box sx={{ mt: 2 }}>
       {addonCategories.map((addonCategory) => {
         return (
           <Box

@@ -47,35 +47,39 @@ export const formatOrders = (
     );
     const addonIds = currentOrders.map((currentOrder) => currentOrder.addonId);
     let orderAddons: OrderAddon[] = [];
-    addonIds.map((addonId) => {
-      const addon = addons.find((addon) => addon.id === addonId) as Addon;
-      const isExist = orderAddons.find(
-        (orderAddon) => orderAddon.addonCategoryId === addon.addonCategoryId
-      );
-      if (isExist) {
-        orderAddons = orderAddons.map((orderAddon) => {
-          const isSameParent =
-            orderAddon.addonCategoryId === addon.addonCategoryId;
-          if (isSameParent) {
-            return {
-              addonCategoryId: orderAddon.addonCategoryId,
-              addons: [...orderAddon.addons, addon],
-            };
-          } else {
-            return orderAddon;
-          }
-        });
-      } else {
-        orderAddons = [
-          ...orderAddons,
-          { addonCategoryId: addon.addonCategoryId, addons: [addon] },
-        ];
-      }
-    });
+    if (addonIds.length) {
+      addonIds.map((addonId) => {
+        const addon = addons.find((addon) => addon.id === addonId) as Addon;
+        if (!addon) return;
+        const isExist = orderAddons.find(
+          (orderAddon) => orderAddon.addonCategoryId === addon.addonCategoryId
+        );
+        if (isExist) {
+          orderAddons = orderAddons.map((orderAddon) => {
+            const isSameParent =
+              orderAddon.addonCategoryId === addon.addonCategoryId;
+            if (isSameParent) {
+              return {
+                addonCategoryId: orderAddon.addonCategoryId,
+                addons: [...orderAddon.addons, addon],
+              };
+            } else {
+              return orderAddon;
+            }
+          });
+        } else {
+          orderAddons = [
+            ...orderAddons,
+            { addonCategoryId: addon.addonCategoryId, addons: [addon] },
+          ];
+        }
+      });
+    }
     return {
       itemId: orderItemId,
       status: currentOrders[0].status,
-      orderAddons,
+      quantity: currentOrders[0].quantity,
+      orderAddons: addonIds.length ? orderAddons : [],
       menu: menus.find((menu) => menu.id === currentOrders[0].menuId) as Menu,
       table: tables.find(
         (table) => table.id === currentOrders[0].tableId

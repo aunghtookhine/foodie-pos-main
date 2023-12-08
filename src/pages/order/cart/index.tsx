@@ -23,11 +23,7 @@ const CartPage = () => {
   const tableId = Number(query.tableId);
   const addonCategories = useAppSelector((state) => state.addonCategory.items);
   const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   if (!cartItems.length) {
-  //     router.push({ pathname: "/order", query });
-  //   }
-  // }, [cartItems]);
+
   const renderAddons = (addons: Addon[]) => {
     if (!addons.length) return;
     return addons.map((addon) => {
@@ -94,6 +90,7 @@ const CartPage = () => {
           >
             Review your order
           </Typography>
+          <Divider sx={{ my: 3 }} />
           {cartItems.map((cartItem) => {
             const { addons, menu, quantity } = cartItem;
             return (

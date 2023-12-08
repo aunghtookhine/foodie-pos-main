@@ -16,7 +16,14 @@ const TablePage = () => {
           Create New Table
         </Button>
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "flex-start" },
+          mt: 2,
+        }}
+      >
         {tables.map((table) => (
           <ItemCard
             key={table.id}

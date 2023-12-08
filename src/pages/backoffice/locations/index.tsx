@@ -20,7 +20,14 @@ const LocationPage = () => {
           Create New Location
         </Button>
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "flex-start" },
+          mt: 2,
+        }}
+      >
         {locations.map((location) => (
           <ItemCard
             key={location.id}
