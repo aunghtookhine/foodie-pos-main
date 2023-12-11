@@ -16,7 +16,7 @@ const LandingFooter = () => {
         color: "#ffffff",
       }}
     >
-      <Box sx={{ mb: 2, textAlign: { xs: "center", lg: "start" } }}>
+      <Box sx={{ mb: {xs: 2, sm: 0}, textAlign: { xs: "center", lg: "start" } }}>
         <Typography>© foodiePOS</Typography>
         <Typography>Privacy Policy | Terms of service</Typography>
       </Box>

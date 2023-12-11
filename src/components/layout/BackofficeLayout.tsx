@@ -13,8 +13,7 @@ interface Props {
 const BackofficeLayout = ({ children }: Props) => {
   const { data: session } = useSession();
   const dispatch = useAppDispatch();
-  const { init } = useAppSelector((state) => state.app);
-  // const locations = useAppSelector((state) => state.location.items);
+  const { init, isLoading } = useAppSelector((state) => state.app);
 
   useEffect(() => {
     if (session && !init) {

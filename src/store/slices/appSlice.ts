@@ -1,6 +1,6 @@
 import { AppSlice, GetAppDataOptions } from "@/types/app";
 import { config } from "@/utils/config";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setAddonCategories } from "./addonCategorySlice";
 import { setAddons } from "./addonSlice";
 import { setCompany } from "./companySlice";
@@ -23,6 +23,7 @@ const initialState: AppSlice = {
 export const fetchAppData = createAsyncThunk(
   "app/fetchAppData",
   async (options: GetAppDataOptions, thunkApi) => {
+    thunkApi.dispatch(setLoading(true));
     const { tableId, onSuccess, onError } = options;
     const fetchAppUrl = tableId
       ? `${config.apiBaseUrl}/app?tableId=${tableId}`
@@ -60,6 +61,8 @@ export const fetchAppData = createAsyncThunk(
       thunkApi.dispatch(setOrders(order));
       thunkApi.dispatch(setCompany(company));
       thunkApi.dispatch(setInit(true));
+      thunkApi.dispatch(setLoading(false));
+
       onSuccess && onSuccess();
     } catch (err) {
       onError && onError();
@@ -74,8 +77,11 @@ const appSlice = createSlice({
     setInit: (state, action) => {
       state.init = action.payload;
     },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setInit } = appSlice.actions;
+export const { setInit, setLoading } = appSlice.actions;
 export default appSlice.reducer;

@@ -48,6 +48,7 @@ export const updateOrder = createAsyncThunk(
       );
       const { orders } = await response.json();
       thunkApi.dispatch(setOrders(orders));
+
       onSuccess && onSuccess();
     } catch (error) {
       onError && onError();

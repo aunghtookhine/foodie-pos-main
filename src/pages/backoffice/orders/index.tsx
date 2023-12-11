@@ -20,6 +20,7 @@ const OrdersPage = () => {
   const [statusValue, setStatusValue] = useState<ORDERSTATUS>(
     ORDERSTATUS.PENDING
   );
+  const { isLoading } = useAppSelector((state) => state.app);
 
   useEffect(() => {
     if (orders.length) {
