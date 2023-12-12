@@ -18,7 +18,7 @@ export const createNewTable = createAsyncThunk(
   async (options: CreateNewTableOptions, thunkApi) => {
     const { name, locationId, onSuccess, onError } = options;
     try {
-      const response = await fetch(`${config.apiBaseUrl}/table`, {
+      const response = await fetch(`${config.backofficeApiUrl}/table`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, locationId }),
@@ -37,7 +37,7 @@ export const updateTable = createAsyncThunk(
   async (options: UpdateTableOptions, thunkApi) => {
     const { id, name, locationId, onSuccess, onError } = options;
     try {
-      const response = await fetch(`${config.apiBaseUrl}/table`, {
+      const response = await fetch(`${config.backofficeApiUrl}/table`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ id, name, locationId }),
@@ -56,7 +56,7 @@ export const deleteTable = createAsyncThunk(
   async (options: DeleteTableOptions, thunkApi) => {
     const { id, onSuccess, onError } = options;
     try {
-      await fetch(`${config.apiBaseUrl}/table?id=${id}`, {
+      await fetch(`${config.backofficeApiUrl}/table?id=${id}`, {
         method: "DELETE",
       });
       thunkApi.dispatch(removeTable({ id }));

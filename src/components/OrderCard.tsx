@@ -11,7 +11,6 @@ interface Props {
 
 const OrderCard = ({ orderItem, handleStatusChange, isAdmin }: Props) => {
   const addonCategories = useAppSelector((state) => state.addonCategory.items);
-
   return (
     <Card sx={{ width: 280, height: 280, mr: 2, mb: 2 }}>
       <Box

@@ -47,11 +47,11 @@ const TopBar = () => {
       </Box>
       {session ? (
         <Box>
-          <IconButton sx={{ display: { xs: "block", sm: "none" } }}>
-            <MenuIcon
-              sx={{ color: "secondary.main", fontSize: 35 }}
-              onClick={() => setDrawerOpen(true)}
-            />
+          <IconButton
+            sx={{ display: { xs: "block", sm: "none" } }}
+            onClick={() => setDrawerOpen(true)}
+          >
+            <MenuIcon sx={{ color: "secondary.main", fontSize: 35 }} />
           </IconButton>
           <Button
             variant="contained"

@@ -14,12 +14,7 @@ const disabledLocationMenuSlice = createSlice({
     setDisabledLocationMenus: (state, action) => {
       state.items = action.payload;
     },
-    // addDisabledLocationMenu: (state, action) => {
-    //   const exist = state.items.find((item) => item.id === action.payload.id);
-    //   if (!exist) {
-    //     state.items = [...state.items, action.payload];
-    //   }
-    // },
+
     removeDisabledLocationMenu: (state, action) => {
       const { locationId, menuId } = action.payload;
       state.items = state.items.filter(

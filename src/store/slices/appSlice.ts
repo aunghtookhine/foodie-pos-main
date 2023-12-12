@@ -26,8 +26,9 @@ export const fetchAppData = createAsyncThunk(
     thunkApi.dispatch(setLoading(true));
     const { tableId, onSuccess, onError } = options;
     const fetchAppUrl = tableId
-      ? `${config.apiBaseUrl}/app?tableId=${tableId}`
-      : `${config.apiBaseUrl}/app`;
+      ? `${config.orderApiUrl}/app?tableId=${tableId}`
+      : `${config.backofficeApiUrl}/app`;
+
     try {
       const response = await fetch(fetchAppUrl);
       const appData = await response.json();

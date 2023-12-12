@@ -56,7 +56,7 @@ const NewMenu = ({ open, setOpen }: Props) => {
     if (menuImage) {
       const formData = new FormData();
       formData.append("files", menuImage);
-      const response = await fetch(`${config.apiBaseUrl}/assets`, {
+      const response = await fetch(`${config.backofficeApiUrl}/assets`, {
         method: "POST",
         body: formData,
       });

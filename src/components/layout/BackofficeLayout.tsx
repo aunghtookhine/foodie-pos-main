@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchAppData } from "@/store/slices/appSlice";
 import { Box } from "@mui/material";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 import SideBar from "../SideBar";
 import TopBar from "../TopBar";
@@ -14,10 +15,14 @@ const BackofficeLayout = ({ children }: Props) => {
   const { data: session } = useSession();
   const dispatch = useAppDispatch();
   const { init, isLoading } = useAppSelector((state) => state.app);
+  const router = useRouter();
 
   useEffect(() => {
     if (session && !init) {
       dispatch(fetchAppData({}));
+    }
+    if (!session) {
+      router.push("/backoffice");
     }
   }, [session]);
 

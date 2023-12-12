@@ -10,10 +10,10 @@ export const authOptions = {
       clientSecret: config.googleClientSecret,
     }),
   ],
-  pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signout",
-  },
+  // pages: {
+  //   signIn: "/auth/signin",
+  //   signOut: "/auth/signout",
+  // },
 };
 
 export default NextAuth(authOptions);

@@ -29,7 +29,7 @@ export const getMenus = createAsyncThunk(
     const { locationId, onSuccess, onError } = options;
     try {
       const response = await fetch(
-        `${config.apiBaseUrl}/menu?locationId=${locationId}`
+        `${config.backofficeApiUrl}/menu?locationId=${locationId}`
       );
       const menus = await response.json();
       thunkApi.dispatch(setMenus(menus));
@@ -46,7 +46,7 @@ export const createNewMenu = createAsyncThunk(
     const { name, price, assetUrl, menuCategoryIds, onSuccess, onError } =
       options;
     try {
-      const response = await fetch(`${config.apiBaseUrl}/menu`, {
+      const response = await fetch(`${config.backofficeApiUrl}/menu`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ name, price, assetUrl, menuCategoryIds }),
@@ -76,7 +76,7 @@ export const updateMenu = createAsyncThunk(
       onError,
     } = options;
     try {
-      const response = await fetch(`${config.apiBaseUrl}/menu`, {
+      const response = await fetch(`${config.backofficeApiUrl}/menu`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -112,7 +112,7 @@ export const deleteMenu = createAsyncThunk(
   async (options: DeleteMenuOptions, thunkApi) => {
     const { id, onSuccess, onError } = options;
     try {
-      await fetch(`${config.apiBaseUrl}/menu?id=${id}`, {
+      await fetch(`${config.backofficeApiUrl}/menu?id=${id}`, {
         method: "DELETE",
       });
       thunkApi.dispatch(removeMenu({ id }));

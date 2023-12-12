@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 const OrdersPage = () => {
   const dispatch = useAppDispatch();
-  const orders = useAppSelector((state) => state.order.items);
+  const allOrders = useAppSelector((state) => state.order.items);
   const addons = useAppSelector((state) => state.addon.items);
   const menus = useAppSelector((state) => state.menu.items);
   const tables = useAppSelector((state) => state.table.items);
@@ -20,23 +20,31 @@ const OrdersPage = () => {
   const [statusValue, setStatusValue] = useState<ORDERSTATUS>(
     ORDERSTATUS.PENDING
   );
-  const { isLoading } = useAppSelector((state) => state.app);
+  const selectedLocation = useAppSelector(
+    (state) => state.location.selectedLocation
+  );
 
   useEffect(() => {
-    if (orders.length) {
+    if (allOrders.length) {
+      const selectedLocationTableIds = tables
+        .filter((item) => item.locationId === selectedLocation?.id)
+        .map((table) => table.id);
+      const orders = allOrders.filter((item) =>
+        selectedLocationTableIds.includes(item.tableId)
+      );
       const formattedOrders = formatOrders(orders, addons, menus, tables);
       const filtered = formattedOrders.filter(
         (item) => item.status === statusValue
       );
       setOrderItems(filtered);
     }
-  }, [orders, statusValue]);
+  }, [allOrders, statusValue]);
 
   const handleStatusChange = (itemId: string, status: ORDERSTATUS) => {
     dispatch(updateOrder({ itemId, status }));
   };
 
-  if (!orders.length) return null;
+  if (!allOrders.length) return null;
 
   return (
     <Box>
