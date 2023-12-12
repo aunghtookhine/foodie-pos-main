@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createLocation } from "@/store/slices/locationSlice";
 import { setOpenSnackBar } from "@/store/slices/snackBarSlice";
 import {
@@ -17,6 +17,7 @@ interface Props {
 }
 
 const NewLocation = ({ open, setOpen }: Props) => {
+  const companyId = useAppSelector((state) => state.company.item?.id);
   const [newLocation, setNewLocation] = useState({
     name: "",
     street: "",
@@ -30,10 +31,13 @@ const NewLocation = ({ open, setOpen }: Props) => {
     dispatch(setOpenSnackBar({ message: "Successfully created." }));
   };
 
+  if (!companyId) return null;
+
   const handleCreateNewLocation = () => {
     dispatch(
       createLocation({
         ...newLocation,
+        companyId,
         onSuccess,
       })
     );

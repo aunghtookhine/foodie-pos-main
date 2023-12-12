@@ -1,30 +1,22 @@
-export { default } from "next-auth/middleware";
+// export { default } from "next-auth/middleware";
 
-// src/middleware.js
-// or
-// src/app/middleware.js
-// or
-// src/pages/middleware.js
+// export function middleware() {
+//   // retrieve the current response
+//   const res = NextResponse.next();
 
-import { NextResponse } from "next/server";
+//   // add the CORS headers to the response
+//   res.headers.append("Access-Control-Allow-Credentials", "true");
+//   res.headers.append("Access-Control-Allow-Origin", "*"); // replace this your actual origin
+//   res.headers.append(
+//     "Access-Control-Allow-Methods",
+//     "GET,DELETE,PATCH,POST,PUT"
+//   );
+//   res.headers.append(
+//     "Access-Control-Allow-Headers",
+//     "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+//   );
 
-export function middleware() {
-  // retrieve the current response
-  const res = NextResponse.next();
-
-  // add the CORS headers to the response
-  res.headers.append("Access-Control-Allow-Credentials", "true");
-  res.headers.append("Access-Control-Allow-Origin", "*"); // replace this your actual origin
-  res.headers.append(
-    "Access-Control-Allow-Methods",
-    "GET,DELETE,PATCH,POST,PUT"
-  );
-  res.headers.append(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
-
-  return res;
-}
+//   return res;
+// }
 
 export const config = { matcher: ["/api/backoffice/:path*"] };

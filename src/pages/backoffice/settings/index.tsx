@@ -3,11 +3,9 @@ import { updateCompany } from "@/store/slices/companySlice";
 import { setOpenSnackBar } from "@/store/slices/snackBarSlice";
 import { UpdateCompanyOptions } from "@/types/company";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const SettingsPage = () => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const [data, setData] = useState<UpdateCompanyOptions>();
