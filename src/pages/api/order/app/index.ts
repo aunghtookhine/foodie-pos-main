@@ -40,7 +40,7 @@ export default async function handler(
     //find disabledLocationMenuCategory
     const disabledLocationMenuCategory =
       await prisma.disabledLocationMenuCategory.findMany({
-        where: { menuCategoryId: { in: menuCategoryIds } },
+        where: { menuCategoryId: { in: menuCategoryIds }, locationId },
       });
 
     const disabledLocationMenuCategoryIds = disabledLocationMenuCategory.map(
@@ -63,7 +63,7 @@ export default async function handler(
 
     //find disabledLocationMenu
     const disabledLocationMenu = await prisma.disabledLocationMenu.findMany({
-      where: { menuId: { in: menuIds } },
+      where: { menuId: { in: menuIds }, locationId },
     });
 
     const disabledLocationMenuIds = disabledLocationMenu.map(
